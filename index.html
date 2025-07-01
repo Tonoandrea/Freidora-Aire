@@ -1,0 +1,560 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Interactivo: Recetas Freidora de Aire SOGO Doble Cesta</title>
+    <style>
+        /* Estilos CSS Inline */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        h1 .icon {
+            font-size: 1.5em;
+        }
+        h2 {
+            color: #2196F3;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            font-size: 1.6em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        h2 .icon {
+            font-size: 1.2em;
+        }
+        .step {
+            background-color: #e8f5e9;
+            border-left: 5px solid #4CAF50;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .step:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+        .step-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .step-content .icon {
+            font-size: 3em;
+            color: #4CAF50;
+            flex-shrink: 0;
+        }
+        .step-text {
+            flex-grow: 1;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        .button-group {
+            text-align: center;
+            margin-top: 25px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .quiz-section {
+            background-color: #fffde7;
+            border: 1px solid #ffe082;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+        }
+        .quiz-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .quiz-options label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .correct {
+            color: #28a745;
+        }
+        .incorrect {
+            color: #dc3545;
+        }
+        .recipe-card {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+        .recipe-card:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+        .recipe-title {
+            color: #d35400;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .recipe-title .icon {
+            font-size: 1.2em;
+            color: #f39c12;
+        }
+        .recipe-details {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background-color: #e0f2f7;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.95em;
+            color: #2c3e50;
+        }
+        .detail-item .icon {
+            font-size: 1em;
+            color: #3498db;
+        }
+        .ingredients ul, .instructions ol {
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        .ingredients li, .instructions li {
+            margin-bottom: 8px;
+        }
+        .tip {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-style: italic;
+            color: #1976D2;
+        }
+        .tip .icon {
+            font-size: 1.5em;
+            color: #2196F3;
+        }
+        .hidden {
+            display: none;
+        }
+
+        /* Iconos (usando caracteres Unicode o simples representaciones) */
+        .icon {
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+            font-style: normal;
+        }
+        .icon-air-fryer::before { content: '🍟'; }
+        .icon-power::before { content: '🔌'; }
+        .icon-display::before { content: '💡'; }
+        .icon-basket::before { content: '🧺'; }
+        .icon-temperature::before { content: '🌡️'; }
+        .icon-timer::before { content: '⏰'; }
+        .icon-food::before { content: '🍔'; }
+        .icon-shake::before { content: '🔄'; }
+        .icon-check::before { content: '✅'; }
+        .icon-quiz::before { content: '❓'; }
+        .icon-recipe::before { content: '🧑‍🍳'; }
+        .icon-prep::before { content: '🔪'; }
+        .icon-time::before { content: '⏱️'; }
+        .icon-servings::before { content: '🍽️'; }
+        .icon-tip::before { content: '💡'; }
+        .icon-ingredients::before { content: '📋'; }
+        .icon-instructions::before { content: '➡️'; }
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.4em;
+            }
+            .step-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .step-content .icon {
+                margin-bottom: 10px;
+            }
+            button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><span class="icon icon-air-fryer"></span> Tutorial: Freidora de Aire SOGO Doble Cesta</h1>
+        <p>¡Hola! Prepárate para descubrir el mundo de la cocina saludable y deliciosa con tu nueva freidora de aire SOGO de doble cesta. Este tutorial interactivo te guiará paso a paso para que te conviertas en un experto. ¡Empecemos!</p>
+
+        <div id="tutorial-steps">
+            <div id="step1" class="step">
+                <h2><span class="icon icon-power"></span> Paso 1: Conectando y Encendiendo tu Freidora</h2>
+                <div class="step-content">
+                    <span class="icon icon-power"></span>
+                    <div class="step-text">
+                        <p>Lo primero es lo primero. Asegúrate de que tu freidora de aire SOGO esté sobre una superficie plana y estable, lejos de fuentes de calor. Ahora, conecta el cable de alimentación a un enchufe.</p>
+                        <p>Una vez conectada, pulsa el botón de encendido/apagado (suele ser el símbolo de un círculo con una línea vertical) en el panel de control. ¡La pantalla debería iluminarse!</p>
+                        <p><strong>Simulación:</strong></p>
+                        <p>¿Conectaste la freidora? <button id="btnConnect" onclick="checkConnection()">Sí, ya está conectada</button></p>
+                        <p id="connectionFeedback" class="feedback"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="step2" class="step hidden">
+                <h2><span class="icon icon-display"></span> Paso 2: Familiarizándote con el Panel de Control</h2>
+                <div class="step-content">
+                    <span class="icon icon-display"></span>
+                    <div class="step-text">
+                        <p>Tu freidora SOGO tiene un panel digital muy intuitivo. Verás botones para:</p>
+                        <ul>
+                            <li><strong>Encendido/Apagado:</strong> Para prender y apagar.</li>
+                            <li><strong>Modos Preestablecidos:</strong> Iconos para papas fritas, pollo, pescado, etc. (cada uno con temperatura y tiempo sugeridos).</li>
+                            <li><strong>Temperatura:</strong> Botones '+' y '-' para ajustar la temperatura.</li>
+                            <li><strong>Tiempo:</strong> Botones '+' y '-' para ajustar el tiempo de cocción.</li>
+                            <li><strong>Sincronizar/Doble Cocción:</strong> ¡La magia de la doble cesta! Este botón te permite cocinar dos cosas diferentes a la vez, o la misma cosa en ambas cestas con programas diferentes.</li>
+                        </ul>
+                        <p>¡Tómate un momento para explorar los botones!</p>
+                        <button onclick="showNextStep('step2', 'step3')">Listo, he explorado el panel</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="step3" class="step hidden">
+                <h2><span class="icon icon-basket"></span> Paso 3: Usando las Cestas Duales</h2>
+                <div class="step-content">
+                    <span class="icon icon-basket"></span>
+                    <div class="step-text">
+                        <p>Una de las grandes ventajas de tu SOGO es su doble cesta. Esto significa que puedes cocinar dos platos diferentes al mismo tiempo, con temperaturas y tiempos distintos, ¡o incluso la misma comida en ambas cestas para raciones más grandes!</p>
+                        <p>Para usar ambas cestas:</p>
+                        <ol>
+                            <li>Coloca los alimentos en la Cesta 1 y en la Cesta 2.</li>
+                            <li>Selecciona el programa (o temperatura y tiempo) para la Cesta 1.</li>
+                            <li>Selecciona el programa (o temperatura y tiempo) para la Cesta 2.</li>
+                            <li>Pulsa el botón "SYNC" o "Doble Cocción" (el icono puede variar, busca algo relacionado con dos cestas o flechas). La freidora ajustará automáticamente el tiempo para que ambos platos terminen a la vez, ¡si es posible!</li>
+                        </ol>
+                        <p><strong>Practica:</strong> Imagina que vas a cocinar. ¿En qué cesta pondrías el pollo y en cuál las verduras si quieres que terminen a la vez?</p>
+                        <input type="radio" id="op1" name="basket_choice" value="pollo_c1_verd_c2"> <label for="op1">Pollo en Cesta 1, Verduras en Cesta 2</label><br>
+                        <input type="radio" id="op2" name="basket_choice" value="pollo_c2_verd_c1"> <label for="op2">Pollo en Cesta 2, Verduras en Cesta 1</label><br>
+                        <button onclick="checkBasketChoice()">Verificar</button>
+                        <p id="basketChoiceFeedback" class="feedback"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="step4" class="step hidden">
+                <h2><span class="icon icon-temperature"></span> Paso 4: Precalentamiento (¡Opcional pero Recomendado!)</h2>
+                <div class="step-content">
+                    <span class="icon icon-temperature"></span>
+                    <div class="step-text">
+                        <p>Aunque no siempre es obligatorio, precalentar tu freidora de aire SOGO durante unos 3-5 minutos a la temperatura deseada puede ayudar a que los alimentos se cocinen de manera más uniforme y queden más crujientes, ¡como si fuera un horno!</p>
+                        <p>Para precalentar:</p>
+                        <ol>
+                            <li>Selecciona la temperatura deseada (ej. 180°C / 360°F).</li>
+                            <li>Ajusta el tiempo a 3-5 minutos.</li>
+                            <li>Pulsa Iniciar.</li>
+                            <li>Una vez que termine, ¡tu freidora estará lista para recibir los alimentos!</li>
+                        </ol>
+                        <button onclick="showNextStep('step4', 'step5')">Entendido, ¡a precalentar!</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="step5" class="step hidden">
+                <h2><span class="icon icon-food"></span> Paso 5: ¡A Cocinar! (Primera Receta Sencilla)</h2>
+                <div class="step-content">
+                    <span class="icon icon-food"></span>
+                    <div class="step-text">
+                        <p>¡Llegó el momento de cocinar! Empezaremos con algo clásico y fácil: ¡Patatas fritas congeladas!</p>
+                        <p><strong>Ingredientes:</strong></p>
+                        <ul>
+                            <li>200-300g de patatas fritas congeladas (por cesta)</li>
+                            <li>Un chorrito de aceite (opcional, pero ayuda a la crocancia)</li>
+                        </ul>
+                        <p><strong>Instrucciones:</strong></p>
+                        <ol>
+                            <li><strong>Prepara:</strong> Si deseas, rocía las patatas con un poco de aceite.</li>
+                            <li><strong>Coloca:</strong> Distribuye las patatas uniformemente en una o ambas cestas (sin amontonar).</li>
+                            <li><strong>Configura:</strong> Ajusta la temperatura a <strong>190°C (375°F)</strong> y el tiempo a <strong>15-20 minutos</strong>.</li>
+                            <li><strong>¡A Cocinar!:</strong> Pulsa el botón de inicio.</li>
+                            <li><strong>Agita:</strong> A mitad del tiempo (aprox. a los 8-10 minutos), saca la cesta (o cestas) y agítalas para que las patatas se doren por todos lados. ¡Vuelve a introducirlas!</li>
+                            <li><strong>Verifica:</strong> Una vez finalizado el tiempo, comprueba si están doradas y crujientes. Si no, añade unos minutos más.</li>
+                        </ol>
+                        <p class="tip"><span class="icon icon-tip"></span> <em>Consejo: Para un resultado aún más crujiente, no sobrecargues las cestas. Es mejor cocinar en tandas si tienes mucha cantidad.</em></p>
+                        <button onclick="showNextStep('step5', 'step6')">¡Entendido! ¿Pasamos a más recetas?</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="step6" class="step hidden">
+                <h2><span class="icon icon-recipe"></span> Paso 6: Recetas Adicionales para tu SOGO Doble Cesta</h2>
+                <p>¡Felicidades! Ya dominas lo básico. Ahora, exploremos algunas recetas más para aprovechar al máximo tu freidora SOGO.</p>
+
+                <div class="recipe-card">
+                    <h3 class="recipe-title"><span class="icon icon-recipe"></span> Pechugas de Pollo Jugosas</h3>
+                    <div class="recipe-details">
+                        <div class="detail-item"><span class="icon icon-prep"></span> Preparación: 5 min</div>
+                        <div class="detail-item"><span class="icon icon-time"></span> Cocción: 15-20 min</div>
+                        <div class="detail-item"><span class="icon icon-temperature"></span> Temp: 190°C</div>
+                        <div class="detail-item"><span class="icon icon-servings"></span> Raciones: 2-4</div>
+                    </div>
+                    <h4 class="ingredients"><span class="icon icon-ingredients"></span> Ingredientes:</h4>
+                    <ul>
+                        <li>2-4 pechugas de pollo deshuesadas y sin piel</li>
+                        <li>1 cucharada de aceite de oliva</li>
+                        <li>Sal, pimienta, ajo en polvo, pimentón al gusto</li>
+                    </ul>
+                    <h4 class="instructions"><span class="icon icon-instructions"></span> Instrucciones:</h4>
+                    <ol>
+                        <li>Seca las pechugas con papel de cocina. Frota con aceite de oliva y sazona con tus especias favoritas.</li>
+                        <li>Coloca las pechugas en una sola capa en una de las cestas. Si son muchas, usa ambas cestas y cocina por separado o sincronizado.</li>
+                        <li>Cocina a <strong>190°C (375°F)</strong> durante <strong>15-20 minutos</strong>, volteándolas a mitad del tiempo. El tiempo puede variar según el grosor.</li>
+                        <li>Asegúrate de que la temperatura interna alcance los 74°C (165°F) para un pollo seguro.</li>
+                    </ol>
+                    <p class="tip"><span class="icon icon-tip"></span> <em>Consejo: Puedes marinar el pollo previamente para darle más sabor.</em></p>
+                </div>
+
+                <div class="recipe-card">
+                    <h3 class="recipe-title"><span class="icon icon-recipe"></span> Salmón al Limón y Eneldo</h3>
+                    <div class="recipe-details">
+                        <div class="detail-item"><span class="icon icon-prep"></span> Preparación: 5 min</div>
+                        <div class="detail-item"><span class="icon icon-time"></span> Cocción: 12-15 min</div>
+                        <div class="detail-item"><span class="icon icon-temperature"></span> Temp: 180°C</div>
+                        <div class="detail-item"><span class="icon icon-servings"></span> Raciones: 2</div>
+                    </div>
+                    <h4 class="ingredients"><span class="icon icon-ingredients"></span> Ingredientes:</h4>
+                    <ul>
+                        <li>2 filetes de salmón</li>
+                        <li>1 cucharadita de aceite de oliva</li>
+                        <li>Zumo de 1/2 limón</li>
+                        <li>1 cucharadita de eneldo seco (o fresco picado)</li>
+                        <li>Sal y pimienta al gusto</li>
+                    </ul>
+                    <h4 class="instructions"><span class="icon icon-instructions"></span> Instrucciones:</h4>
+                    <ol>
+                        <li>Seca los filetes de salmón. Rocía con aceite de oliva, zumo de limón, eneldo, sal y pimienta.</li>
+                        <li>Coloca los filetes en una sola capa en una de las cestas.</li>
+                        <li>Cocina a <strong>180°C (350°F)</strong> durante <strong>12-15 minutos</strong>, dependiendo del grosor del salmón. No es necesario voltear.</li>
+                        <li>El salmón estará listo cuando se desmenuce fácilmente con un tenedor.</li>
+                    </ol>
+                    <p class="tip"><span class="icon icon-tip"></span> <em>Consejo: Acompaña con espárragos o brócoli cocidos en la otra cesta para una comida completa.</em></p>
+                </div>
+
+                <div class="recipe-card">
+                    <h3 class="recipe-title"><span class="icon icon-recipe"></span> Verduras Asadas Mixtas</h3>
+                    <div class="recipe-details">
+                        <div class="detail-item"><span class="icon icon-prep"></span> Preparación: 10 min</div>
+                        <div class="detail-item"><span class="icon icon-time"></span> Cocción: 15-20 min</div>
+                        <div class="detail-item"><span class="icon icon-temperature"></span> Temp: 190°C</div>
+                        <div class="detail-item"><span class="icon icon-servings"></span> Raciones: 2-3</div>
+                    </div>
+                    <h4 class="ingredients"><span class="icon icon-ingredients"></span> Ingredientes:</h4>
+                    <ul>
+                        <li>1 calabacín, cortado en medias lunas</li>
+                        <li>1 pimiento (del color que quieras), en tiras</li>
+                        <li>1 cebolla morada, en gajos</li>
+                        <li>100g de champiñones, laminados</li>
+                        <li>2 cucharadas de aceite de oliva</li>
+                        <li>Sal, pimienta, orégano, ajo en polvo al gusto</li>
+                    </ul>
+                    <h4 class="instructions"><span class="icon icon-instructions"></span> Instrucciones:</h4>
+                    <ol>
+                        <li>En un bol grande, mezcla todas las verduras con el aceite de oliva y las especias.</li>
+                        <li>Divide las verduras en ambas cestas, distribuyéndolas bien para que no se amontonen.</li>
+                        <li>Cocina a <strong>190°C (375°F)</strong> durante <strong>15-20 minutos</strong>.</li>
+                        <li>A mitad del tiempo (aprox. 8-10 minutos), saca las cestas y agítalas bien para que se doren uniformemente.</li>
+                        <li>Continúa cocinando hasta que las verduras estén tiernas y ligeramente doradas.</li>
+                    </ol>
+                    <p class="tip"><span class="icon icon-tip"></span> <em>Consejo: ¡Usa la función SYNC de tu SOGO para que el pollo y las verduras de estas recetas terminen al mismo tiempo!</em></p>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="showQuiz()">¡Estoy listo para una prueba!</button>
+                </div>
+            </div>
+
+            <div id="quiz-section" class="quiz-section hidden">
+                <h2><span class="icon icon-quiz"></span> ¡Hora de la Prueba!</h2>
+                <div class="quiz-question">1. ¿Por qué es recomendable precalentar la freidora de aire?</div>
+                <div class="quiz-options">
+                    <input type="radio" id="q1a" name="q1" value="a"> <label for="q1a">a) Para ahorrar energía.</label><br>
+                    <input type="radio" id="q1b" name="q1" value="b"> <label for="q1b">b) Para que los alimentos se cocinen de forma más uniforme y crujiente.</label><br>
+                    <input type="radio" id="q1c" name="q1" value="c"> <label for="q1c">c) Es obligatorio para todas las recetas.</label><br>
+                </div>
+                <p id="q1Feedback" class="feedback"></p>
+
+                <div class="quiz-question" style="margin-top: 20px;">2. ¿Cuál es la principal ventaja de la freidora SOGO de doble cesta?</div>
+                <div class="quiz-options">
+                    <input type="radio" id="q2a" name="q2" value="a"> <label for="q2a">a) Tiene una pantalla más grande.</label><br>
+                    <input type="radio" id="q2b" name="q2" value="b"> <label for="q2b">b) Permite cocinar dos platos diferentes a la vez, incluso con diferentes ajustes.</label><br>
+                    <input type="radio" id="q2c" name="q2" value="c"> <label for="q2c">c) No necesita aceite.</label><br>
+                </div>
+                <p id="q2Feedback" class="feedback"></p>
+
+                <button onclick="submitQuiz()">Enviar Respuestas</button>
+                <div id="quizResult" class="feedback"></div>
+            </div>
+        </div>
+
+        <div id="final-message" class="hidden" style="text-align: center; margin-top: 40px; background-color: #dcedc8; padding: 25px; border-radius: 10px; border: 2px solid #8bc34a;">
+            <h2><span class="icon icon-check"></span> ¡Enhorabuena!</h2>
+            <p style="font-size: 1.2em;">¡Has completado este tutorial con éxito! Ahora tienes los conocimientos básicos para empezar a disfrutar de tu freidora de aire SOGO con doble cesta. ¡Experimenta con nuevas recetas y disfruta de comidas más saludables y deliciosas!</p>
+            <p>¡A cocinar!</p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript Inline
+        let connectionMade = false;
+
+        function checkConnection() {
+            connectionMade = true;
+            document.getElementById('connectionFeedback').innerHTML = '<span class="correct">¡Excelente! Tu freidora está lista.</span>';
+            document.getElementById('btnConnect').disabled = true;
+            setTimeout(() => showNextStep('step1', 'step2'), 1500);
+        }
+
+        function showNextStep(currentStepId, nextStepId) {
+            document.getElementById(currentStepId).classList.add('hidden');
+            document.getElementById(nextStepId).classList.remove('hidden');
+            window.scrollTo(0, 0); // Scroll to top for new step
+        }
+
+        function checkBasketChoice() {
+            const feedback = document.getElementById('basketChoiceFeedback');
+            const op1 = document.getElementById('op1');
+            const op2 = document.getElementById('op2');
+
+            if (op1.checked || op2.checked) {
+                feedback.innerHTML = '<span class="correct">¡Correcto! En una freidora de doble cesta, el orden no importa tanto como la configuración individual y la función SYNC para que terminen a la vez. ¡Buen trabajo!</span>';
+                setTimeout(() => showNextStep('step3', 'step4'), 2500);
+            } else {
+                feedback.innerHTML = '<span class="incorrect">Por favor, selecciona una opción para continuar.</span>';
+            }
+        }
+
+        function showQuiz() {
+            document.getElementById('step6').classList.add('hidden');
+            document.getElementById('quiz-section').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            const q1Feedback = document.getElementById('q1Feedback');
+            const q2Feedback = document.getElementById('q2Feedback');
+            const quizResult = document.getElementById('quizResult');
+
+            // Pregunta 1
+            const q1Answer = document.querySelector('input[name="q1"]:checked');
+            if (q1Answer && q1Answer.value === 'b') {
+                q1Feedback.innerHTML = '<span class="correct">Correcto.</span>';
+                score++;
+            } else {
+                q1Feedback.innerHTML = '<span class="incorrect">Incorrecto. La respuesta correcta es (b).</span>';
+            }
+
+            // Pregunta 2
+            const q2Answer = document.querySelector('input[name="q2"]:checked');
+            if (q2Answer && q2Answer.value === 'b') {
+                q2Feedback.innerHTML = '<span class="correct">Correcto.</span>';
+                score++;
+            } else {
+                q2Feedback.innerHTML = '<span class="incorrect">Incorrecto. La respuesta correcta es (b).</span>';
+            }
+
+            quizResult.innerHTML = `Has obtenido ${score} de 2 respuestas correctas.`;
+
+            if (score === 2) {
+                quizResult.classList.remove('incorrect');
+                quizResult.classList.add('correct');
+                setTimeout(() => {
+                    document.getElementById('quiz-section').classList.add('hidden');
+                    document.getElementById('final-message').classList.remove('hidden');
+                    window.scrollTo(0, 0);
+                }, 2000);
+            } else {
+                quizResult.classList.remove('correct');
+                quizResult.classList.add('incorrect');
+            }
+        }
+    </script>
+</body>
+</html>
+```
